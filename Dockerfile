@@ -1,19 +1,6 @@
 FROM python:3.11-slim
 
-# Install ALL build dependencies (gcc needed for PyAV compilation)
-RUN apt-get update && apt-get install -y \
-    ffmpeg \
-    pkg-config \
-    gcc \
-    build-essential \
-    libavformat-dev \
-    libavcodec-dev \
-    libavdevice-dev \
-    libavutil-dev \
-    libswscale-dev \
-    libswresample-dev \
-    libavfilter-dev \
-    && rm -rf /var/lib/apt/lists/*
+RUN apt-get update && apt-get install -y ffmpeg && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
 
@@ -22,8 +9,19 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-RUN mkdir -p /tmp/autocut/uploads /tmp/autocut/outputs /tmp/autocut/processing /tmp/autocut/styles
+RUN mkdir -p /tmp/autocut/uploads /tmp/autocut/outputs /tmp/autocut/processing
 
 EXPOSE 8000
 
 CMD ["python", "main.py"]
+```
+
+---
+
+### 2. **requirements.txt** :
+```
+fastapi==0.109.0
+uvicorn==0.27.0
+python-multipart==0.0.6
+pydantic==2.5.3
+aiofiles==23.2.1
