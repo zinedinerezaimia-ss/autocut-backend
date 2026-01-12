@@ -14,14 +14,3 @@ RUN mkdir -p /tmp/autocut/uploads /tmp/autocut/outputs /tmp/autocut/processing
 EXPOSE 8000
 
 CMD ["python", "main.py"]
-```
-
----
-
-### 2. **requirements.txt** :
-```
-fastapi==0.109.0
-uvicorn==0.27.0
-python-multipart==0.0.6
-pydantic==2.5.3
-aiofiles==23.2.1
